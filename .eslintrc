@@ -1,0 +1,16 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "env": {
+    "amd": true,
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "hacker_text_config": true
+  },
+  "rules": {
+    "no-console": 0,
+    "global-require": "off",
+    "import/no-dynamic-require": "off"
+  }
+}

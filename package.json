@@ -1,0 +1,117 @@
+{
+  "name": "hackertextjs",
+  "description": "A web based library for customizable hacker text widgets.",
+  "version": "0.2.0",
+  "homepage": "https://github.com/spacekitcat/hackertextjs",
+  "author": {
+    "name": "Lisa Rae Burton",
+    "email": "0lisa.burton@gmail.com",
+    "url": "spacekitcat.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spacekitcat/hackertextjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spacekitcat/hackertextjs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/spacekitcat/hackertextjs/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/hacker-text-js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "airbnb-style": "^2.0.0",
+    "almond": "^0.3.3",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-dom": "^1.6.0",
+    "chai-sinon": "^2.8.1",
+    "codeclimate-test-reporter": "^0.5.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "geckodriver": "^1.11.0",
+    "grunt": "~0.4.5",
+    "grunt-babel": "^7.0.0",
+    "grunt-banner": "^0.6.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-es6-transpiler": "^1.0.2",
+    "grunt-exec": "^3.0.0",
+    "grunt-karma": "^2.0.0",
+    "grunt-karma-coveralls": "^2.5.4",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-replace": "^1.0.1",
+    "gruntify-eslint": "^4.0.0",
+    "jasmine-core": "^2.8.0",
+    "jquery": "^3.2.1",
+    "karma": "^1.7.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-growl-reporter": "^1.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jquery": "^0.2.2",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-requirejs": "^1.1.0",
+    "karma-sinon": "^1.0.5",
+    "load-grunt-config": "^0.19.2",
+    "load-grunt-tasks": "^3.5.2",
+    "lolex": "^2.3.1",
+    "mocha": "*",
+    "mock-browser": "^0.92.14",
+    "nightwatch": "^0.9.20",
+    "p-try": "^1.0.0",
+    "path": "^0.12.7",
+    "puppeteer": "^0.13.0",
+    "requirejs": "^2.3.5",
+    "requirejs-babel": "0.0.9",
+    "selenium-download": "2.0.11",
+    "selenium-server": "3.11.0",
+    "selenium-standalone": "6.13.0",
+    "sinon": "^4.1.2"
+  },
+  "keywords": [
+    "this",
+    "is",
+    "a",
+    "song",
+    "from",
+    "the",
+    "80s",
+    "the",
+    "decade",
+    "which",
+    "it",
+    "currently",
+    "is"
+  ],
+  "dependencies": {
+    "babel-preset-airbnb": "^2.4.0",
+    "grunt-contrib-requirejs": "^1.0.0"
+  }
+}

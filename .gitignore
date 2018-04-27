@@ -1,0 +1,14 @@
+/node_modules/
+package-lock.json
+/dist/
+/coverage/
+/libs/
+*.swp
+/lcov/
+/tmp/
+/integration-test-reports/
+*.log
+*.zip
+/build/
+**.tgz
+.DS_Store

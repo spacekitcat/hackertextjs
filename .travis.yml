@@ -1,0 +1,51 @@
+dist: trusty
+sudo: true
+language: node_js
+node_js:
+- 9.2.0
+env:
+- MOZ_HEADLESS=1
+addons:
+  firefox: latest
+  apt:
+    packages:
+    - oracle-java8-set-default
+    - xvfb
+before_scripts:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
+- npm i grunt-cli -g
+- npm i nightwatch -g
+before_install:
+- "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
+  --background --exec /usr/bin/Xvfb -- :99.0 -ac -screen 0 1280x1024x16"
+- npm i
+after_script:
+- npm install -g codeclimate-test-reporter
+- codeclimate-test-reporter < ./lcov/**/*lcov.info
+after_failure:
+- find . -name "*.log" -exec cat {} +
+before_deploy:
+- "echo 'SPACE PASTA'"
+- "cd ${TRAVIS_BUILD_DIR}"
+- export NPM_VERSION=$(sh version.sh)
+- echo "Resolved version is $NPM_VERSION"
+- npm pack
+deploy:
+  - provider: npm
+    email: 0lisa.burton@gmail.com
+    api_key: $NPM_TOKEN
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: releases
+    api_key:
+      secure: AAHOKpwaMF1uok0Bg/v5oEpHWhnEbevfv3EIE22YVv+UJAcGDIwB/s+vlKC5gXWf3iEfCwM9AmdrENrXrxpoFlHpF6V9MBpDcaUoNFuFpI8Q40j6fzG4eIiP28hqAy8rU3LBdMXd53p7pFVHrP9uZuMOsLom1rdjDsE24vi7r9Nej/cdSRxDWANQbUTFSACtLooCv043Pv8b0VrYBS839xPWig1XxcHfU2g2IYHxbZbsxFNDdZQUf4p+lHO55hxgdjE/YC+R31T6HblK1OKkPzW1v8gl9As6DaLn6Zc2n1loV1XzP40NFB0mhMoLlDo+5PnTaEk0vVAGxntsPFSXq2OZMKC546Hl6CEBUk53w8eaWCfpIHDDryYYP/6qEId6NmMcA2Xhc7mY6ISLPRzXSIMQQ0haljMeTMbLAiVaKCNizde8zgLTe8aWxDPcqDfoNqBhgxo5Z2S2T7HAa+oRhlNMw3jTdkIgbABVwzyINwsr2R23Vz3fPcAhNCfu6TxmKnuWsIj2Inp6ydekEQvahpH7fEJisImlUQGNBDTkXm3IOLui/QoL6s51iKh/Rk8O2V18pY/eUjvErwZTAxHOO+mONJv6UI4KKcnxbObPOOkG31LXgM8ArKOLse539wyGu01E0WaX356AlsY4SLYSlyPj8T4braG89TFFnsYYOco=
+    file: "${TRAVIS_BUILD_DIR}/hackertextjs-${NPM_VERSION}.tgz"
+    skip_cleanup: true
+    on:
+      tags: true
+
+
+

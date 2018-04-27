@@ -1,0 +1,5 @@
+*
+!dist/*.js
+!dist/*.css
+!dist/examples/**
+
