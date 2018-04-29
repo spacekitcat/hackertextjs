@@ -1,4 +1,4 @@
-define('FrameRendererBuilder', ['FrameRenderer'], FrameRenderer =>
+define('FrameRendererBuilder', ['FrameRenderer', 'RandomizedFrameRenderStrategy'], (FrameRenderer, RandomizedFrameRenderStrategy) =>
   class FrameRendererBuilder {
     constructor() {
       this.reset();
@@ -12,6 +12,10 @@ define('FrameRendererBuilder', ['FrameRenderer'], FrameRenderer =>
       const copy = this.instance;
       this.reset();
       copy.setOptionValue('dynamicnoiseratio', true);
+      const renderStrategy = new RandomizedFrameRenderStrategy();
+      renderStrategy.setTextDataSource(copy.getTextDataSource());
+      renderStrategy.setOptionValue('dynamicnoiseratio', true);
+      copy.setFrameRenderStrategy(renderStrategy);
       return copy;
     }
 

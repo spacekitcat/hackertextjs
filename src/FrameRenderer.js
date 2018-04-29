@@ -47,13 +47,13 @@ define('FrameRenderer', [], () =>
       }
 
       render(framesize) {
-        var activeNoiseRatio = this.options.noiseratio;
+        let activeNoiseRatio = this.options.noiseratio;
         if (this.options.dynamicnoiseratio === true) {
           activeNoiseRatio = Math.random();
         }
-        var returnstr = '';
+        let returnstr = '';
 
-        for (var i=0; i<framesize; ++i) {
+        for (let i=0; i<framesize; i += 1) {
           if (Math.random() > activeNoiseRatio) {
             returnstr += this.dataSource.getNext();
           } else {
@@ -67,11 +67,6 @@ define('FrameRenderer', [], () =>
       computeNextFrame() {
         if (this.frameRenderStrategy === undefined) {
           return Array(this.getFrameSize() + 1).join('_');
-        }
-
-        let activeNoiseRatio = this.options.noiseratio;
-        if (this.options.dynamicnoiseratio === true) {
-          activeNoiseRatio = Math.random();
         }
 
         return this.frameRenderStrategy.render(this.getFrameSize());
