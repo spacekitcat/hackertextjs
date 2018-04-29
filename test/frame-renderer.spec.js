@@ -1,15 +1,16 @@
-define(['require', 'chai', 'StringIterator', 'FrameRenderer'], function(
-  require,
-  chai,
-  StringIterator,
-  FrameRenderer
-) {
+define(['require', 'chai', 'StringIterator', 'FrameRenderer', 'RandomizedFrameRenderStrategy'], function(
+      require,
+      chai,
+      StringIterator,
+      FrameRenderer,
+      RandomizedFrameRenderStrategy
+      ) {
   var should = chai.should();
   var expect = chai.expect;
 
   var random_stub;
 
-  describe('computerNextFrame', () => {
+  describe('computeNextFrame', () => {
     before(() => {
       random_stub = sinon.stub(Math, 'random').returns(0.4);
     });
@@ -18,12 +19,27 @@ define(['require', 'chai', 'StringIterator', 'FrameRenderer'], function(
       random_stub.restore();
     });
 
+    describe('has no frame render strategy', () => {
+      it('should generate a blank frame', () => {
+        let sut = new FrameRenderer();
+        sut.setFrameSize(8);
+        let renderStrategy = new RandomizedFrameRenderStrategy();
+        renderStrategy.setTextDataSource(new StringIterator("PINK_FLOYD_"));
+        renderStrategy.setOptionValue('noiseratio', 0.4);
+        sut.setFrameRenderStrategy(renderStrategy);
+
+        expect(sut.computeNextFrame()).to.equal('________');
+      });
+    });
+
     it('should generate only from the data source where Math.random is locked to 0.4 and the noise ratio is 0.3', () => {
       var sut = new FrameRenderer();
 
       sut.setFrameSize(17);
-      sut.setOptionValue('noiseratio', 0.3);
-      sut.setTextDataSource(new StringIterator('PINK_FLOYD_'));
+      let renderStrategy = new RandomizedFrameRenderStrategy();
+      renderStrategy.setTextDataSource(new StringIterator("PINK_FLOYD_"));
+      renderStrategy.setOptionValue('noiseratio', 0.3);
+      sut.setFrameRenderStrategy(renderStrategy);
 
       expect(sut.computeNextFrame()).to.equal('PINK_FLOYD_PINK_F');
     });
@@ -37,21 +53,6 @@ define(['require', 'chai', 'StringIterator', 'FrameRenderer'], function(
       expect(sut.computeNextFrame()).to.equal('_____________');
     });
 
-    describe("where the data source doesn't provide getNext", () => {
-      it('should throw a clear exception', () => {
-        var sut = new FrameRenderer();
-        sut.setFrameSize(12);
-        sut.setOptionValue('noiseratio', 0.5);
-
-        // Bof! No data source!?
-
-        expect(() => {
-          sut.computeNextFrame();
-        }).to.throw(
-          'Data source object must provide an implementation of getNext.'
-        );
-      });
-    });
   });
 
   describe('getFrameSize()', () => {
