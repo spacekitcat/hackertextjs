@@ -5,17 +5,17 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
   Widget,
   lolex
 ) {
-  var should = chai.should();
-  var expect = chai.expect;
+  let should = chai.should();
+  let expect = chai.expect;
 
-  var clock = lolex.install({
+  let clock = lolex.install({
     now: 0,
     shouldAdvanceTimer: true,
     advanceTimeDelta: 200,
     loopLimit: 10
   });
 
-  var frame_painter_stub = sinon.createStubInstance(Widget);
+  let frame_painter_stub = sinon.createStubInstance(Widget);
 
   describe('constructor()', () => {
     describe('minimal valid constructor arguments', () => {
@@ -29,7 +29,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
 
   describe('addPainter()', () => {
     describe('valid arguments provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
       sut.addPainter(frame_painter_stub, 6);
 
       it('should bring Widget list to a size of one', () => {
@@ -42,7 +42,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('No arguments provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -52,7 +52,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('literal undefined arguments provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -62,7 +62,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('null arguments provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -72,7 +72,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('literal undefined Widget provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -82,7 +82,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('literal undefined framerate value provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -92,7 +92,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('null Widget provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -102,7 +102,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('incorrect type for Widget provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -112,7 +112,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('null framerate value provided', () => {
-      var sut = new AnimationScheduler();
+      let sut = new AnimationScheduler();
 
       it('should throw a TypeError exception', () => {
         expect(() => {
@@ -124,7 +124,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
 
   describe('start()', () => {
     describe('has zero painter objects', () => {
-      var sut;
+      let sut;
 
       beforeEach(() => {
         sut = new AnimationScheduler();
@@ -140,7 +140,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('has a single 5 FPS painter object', () => {
-      var sut;
+      let sut;
       beforeEach(() => {
         sut = new AnimationScheduler();
         frame_painter_stub.paint.reset();
@@ -158,7 +158,7 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
     });
 
     describe('has a single 9 FPS painter object', () => {
-      var sut;
+      let sut;
       beforeEach(() => {
         sut = new AnimationScheduler();
         frame_painter_stub.paint.reset();
@@ -177,8 +177,8 @@ define(['require', 'chai', 'AnimationScheduler', 'Widget', 'lolex'], function(
   });
 
   describe('has a 3 FPS and a 6 FPS painter object', () => {
-    var sut;
-    var second_frame_painter_stub;
+    let sut;
+    let second_frame_painter_stub;
     beforeEach(() => {
       sut = new AnimationScheduler();
       frame_painter_stub.paint.reset();

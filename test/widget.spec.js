@@ -4,34 +4,33 @@ define([
   'Widget',
   'StringIterator',
   'FrameRenderer'
-], function(require, chai, Widget, StringIterator, FrameRenderer) {
-  var should = chai.should();
-  var expect = chai.expect;
+], () => (require, chai, Widget, StringIterator, FrameRenderer) => {
+  const { expect } = chai;
 
-  var jquery_node = $('<div>');
-  var jquery_node_html_spy = sinon.spy(jquery_node, 'html');
+  const jqueryNode = $('<div>');
+  const jqueryNodeHTMLSpy = sinon.spy(jqueryNode, 'html');
 
-  var render_stub = sinon.createStubInstance(FrameRenderer);
+  const renderStub = sinon.createStubInstance(FrameRenderer);
 
   describe('constructor()', () => {
     describe('valid object parameters for target_node and rendereder', () => {
       it("shouldn't throw any exception", () => {
         expect(() => {
-          new Widget(jquery_node, render_stub);
+          new Widget(jqueryNode, renderStub);
         }).to.not.throw();
       });
 
       it("shouldn't return correct renderer instance", () => {
-        var sut = new Widget(jquery_node, render_stub);
+        const sut = new Widget(jqueryNode, renderStub);
 
-        expect(sut.getRenderer()).to.deep.equal(render_stub);
+        expect(sut.getRenderer()).to.deep.equal(renderStub);
       });
     });
 
     describe('null target_node parameter', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget(null, render_stub);
+          new Widget(null, renderStub);
         }).to.throw(TypeError, /jQuery/);
       });
     });
@@ -39,7 +38,7 @@ define([
     describe('undefined target_node parameter', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget(undefined, render_stub);
+          new Widget(undefined, renderStub);
         }).to.throw(TypeError, /jQuery/);
       });
     });
@@ -47,7 +46,7 @@ define([
     describe('target_node parameter with the wrong type', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget({}, render_stub);
+          new Widget({}, renderStub);
         }).to.throw(TypeError, /jQuery/);
       });
     });
@@ -55,7 +54,7 @@ define([
     describe('null renderer parameter', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget(jquery_node, null);
+          new Widget(jqueryNode, null);
         }).to.throw(TypeError, /FrameRenderer/);
       });
     });
@@ -63,7 +62,7 @@ define([
     describe('undefined renderer parameter', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget(jquery_node, undefined);
+          new Widget(jqueryNode, undefined);
         }).to.throw(TypeError, /FrameRenderer/);
       });
     });
@@ -71,7 +70,7 @@ define([
     describe('renderer parameter with the wrong type', () => {
       it('should throw a TypeError exception', () => {
         expect(() => {
-          new Widget(jquery_node, {});
+          new Widget(jqueryNode, {});
         }).to.throw(TypeError, /FrameRenderer/);
       });
     });
@@ -79,16 +78,16 @@ define([
 
   describe('paint()', () => {
     describe('standrd call with standard params', () => {
-      var sut = new Widget(jquery_node, render_stub);
+      let sut = new Widget(jqueryNode, renderStub);
 
       sut.paint();
 
       it('should make 1 FrameRenderer call to computeNextFrame()', () => {
-        expect(render_stub.computeNextFrame.called).to.be.true;
+        expect(renderStub.computeNextFrame.called).to.be.true;
       });
 
       it('should make 1 Node call to html()', () => {
-        expect(jquery_node_html_spy.called).to.be.true;
+        expect(jqueryNodeHTMLSpy.called).to.be.true;
       });
     });
   });
@@ -96,7 +95,7 @@ define([
   describe('getRowCount()', () => {
     describe('default value', () => {
       it('returns 42', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
         expect(sut.getRowCount()).to.equal(42);
       });
     });
@@ -105,7 +104,7 @@ define([
   describe('setRowCount()', () => {
     describe('undefined value', () => {
       it('throws exception', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
 
         expect(() => {
           sut.setRowCount();
@@ -115,7 +114,7 @@ define([
 
     describe('null value', () => {
       it('throws exception', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
         expect(() => {
           sut.setRowCount(null);
         }).to.throw(TypeError, /rowcount/);
@@ -124,7 +123,7 @@ define([
 
     describe('negative value', () => {
       it('throws exception', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
         expect(() => {
           sut.setRowCount(-1);
         }).to.throw(RangeError, /rowcount/);
@@ -133,7 +132,7 @@ define([
 
     describe('zero', () => {
       it('throws exception', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
         expect(() => {
           sut.setRowCount(0);
         }).to.throw(RangeError, /rowcount/);
@@ -142,7 +141,7 @@ define([
 
     describe('positive integer', () => {
       it('sets value', () => {
-        var sut = new Widget(jquery_node, render_stub);
+        let sut = new Widget(jqueryNode, renderStub);
         sut.setRowCount(67);
         expect(sut.getRowCount()).to.equal(67);
       });
@@ -151,7 +150,7 @@ define([
 
   describe('notify()', () => {
     describe('null subject object', () => {
-      var sut = new Widget(jquery_node, render_stub);
+      let sut = new Widget(jqueryNode, renderStub);
 
       // Message params are only optional.
       it("shouldn't throw any exceptions", () => {

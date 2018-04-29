@@ -6,11 +6,15 @@
     "jquery": true
   },
   "globals": {
-    "hacker_text_config": true
+    "hacker_text_config": true,
+    "describe": true,
+    "it": true,
+    "sinon": true
   },
   "rules": {
     "no-console": 0,
     "global-require": "off",
-    "import/no-dynamic-require": "off"
+    "import/no-dynamic-require": "off",
+    "import/no-amd"
   }
 }
