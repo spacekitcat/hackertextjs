@@ -7,9 +7,17 @@ define(['require', 'chai', 'StringIterator', 'FrameRenderer'], function(
   var should = chai.should();
   var expect = chai.expect;
 
-  var random_stub = sinon.stub(Math, 'random').returns(0.4);
+  var random_stub;
 
   describe('computerNextFrame', () => {
+    before(() => {
+      random_stub = sinon.stub(Math, 'random').returns(0.4);
+    });
+
+    after(() => {
+      random_stub.restore();
+    });
+
     it('should generate only from the data source where Math.random is locked to 0.4 and the noise ratio is 0.3', () => {
       var sut = new FrameRenderer();
 
