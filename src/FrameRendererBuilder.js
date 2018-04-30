@@ -1,4 +1,7 @@
-define('FrameRendererBuilder', ['FrameRenderer', 'RandomizedFrameRenderStrategy'], (FrameRenderer, RandomizedFrameRenderStrategy) =>
+define('FrameRendererBuilder', [
+  'FrameRenderer',
+  'SinePhaseFrameRenderStrategy'
+], (FrameRenderer, SinePhaseFrameRenderStrategy) =>
   class FrameRendererBuilder {
     constructor() {
       this.reset();
@@ -12,7 +15,7 @@ define('FrameRendererBuilder', ['FrameRenderer', 'RandomizedFrameRenderStrategy'
       const copy = this.instance;
       this.reset();
       copy.setOptionValue('dynamicnoiseratio', true);
-      const renderStrategy = new RandomizedFrameRenderStrategy();
+      const renderStrategy = new SinePhaseFrameRenderStrategy();
       renderStrategy.setTextDataSource(copy.getTextDataSource());
       renderStrategy.setOptionValue('dynamicnoiseratio', true);
       copy.setFrameRenderStrategy(renderStrategy);
