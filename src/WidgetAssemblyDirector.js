@@ -1,8 +1,16 @@
 define('WidgetAssemblyDirector', [
   'WidgetBuilder',
   'DomInitialiser',
-  'TextDataSourceFactory'
-], (WidgetBuilder, DomInitialiser, TextDataSourceFactory) =>
+  'TextDataSourceFactory',
+  'RandomizedFrameRenderStrategy',
+  'SinePhaseFrameRenderStrategy'
+], (
+  WidgetBuilder,
+  DomInitialiser,
+  TextDataSourceFactory,
+  RandomizedFrameRenderStrategy,
+  SinePhaseFrameRenderStrategy
+) =>
   class WidgetAssemblyDirector {
     static instantiateSourceFilter(filterName) {
       try {
@@ -48,14 +56,6 @@ define('WidgetAssemblyDirector', [
       const widgetBuilder = new WidgetBuilder();
       const node = DomInitialiser.initialiseDomNode(widgetDescriptor);
 
-      if (widgetDescriptor.renderer) {
-        const renderStrategy = WidgetAssemblyDirector.instantiateRenderStrategy(
-          // 'SinePhaseFrameRenderStrategy'
-          widgetDescriptor.renderer.renderStrategy
-        );
-
-        console.log('Loaded >>>', renderStrategy);
-      }
       const textDataSource = TextDataSourceFactory.makeCoreTextDataSource(
         widgetDescriptor.text
       );
@@ -63,6 +63,29 @@ define('WidgetAssemblyDirector', [
         textDataSource,
         widgetDescriptor.text_character_filters
       );
+
+      if (widgetDescriptor.renderer) {
+        if (
+          widgetDescriptor.renderer.strategy === 'RandomizedFrameRenderStrategy'
+        ) {
+          widgetBuilder.setFrameRenderStrategy(
+            new RandomizedFrameRenderStrategy()
+          );
+        } else {
+          widgetBuilder.setFrameRenderStrategy(
+            new SinePhaseFrameRenderStrategy()
+          );
+        }
+
+        // const RenderStrategy = WidgetAssemblyDirector.instantiateRenderStrategy(
+        // 'SinePhaseFrameRenderStrategy'
+        // widgetDescriptor.renderer.strategy
+        // );
+        // console.log('$$$ ', widgetDescriptor.renderer.strategy);
+        // console.log('Loaded >>>', new RenderStrategy().render);
+
+        // widgetBuilder.setTextDataSource(textDataSource);
+      }
 
       return widgetBuilder
         .setTargetNode(node)
