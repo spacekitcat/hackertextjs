@@ -1,8 +1,17 @@
-define(['require', 'chai', 'WidgetBuilder', 'Widget'], (
+define([
+  'require',
+  'chai',
+  'WidgetBuilder',
+  'Widget',
+  'RandomizedFrameRenderStrategy',
+  'TextDataSource'
+], (
   require,
   chai,
   WidgetBuilder,
-  Widget
+  Widget,
+  RandomizedFrameRenderStrategy,
+  TextDataSource
 ) => {
   const nodeStub = sinon.stub($('div'));
 
@@ -41,6 +50,24 @@ define(['require', 'chai', 'WidgetBuilder', 'Widget'], (
 
       it('rowcount value should get set', () => {
         expect(result.getRowCount()).to.equal(45);
+      });
+    });
+
+    describe('setFrameRenderStrategy', () => {
+      let sut;
+      let result;
+      before(() => {
+        sut = new WidgetBuilder(nodeStub);
+        var renderStrategy = new RandomizedFrameRenderStrategy();
+        renderStrategy.setTextDataSource(new TextDataSource('aaa'));
+        result = sut.setFrameRenderStrategy(renderStrategy).build();
+      });
+
+      it('render strategy should get set', () => {
+        expect(
+          result.getRenderer().getFrameRenderStrategy() instanceof
+            RandomizedFrameRenderStrategy
+        ).to.be.true;
       });
     });
 

@@ -1,14 +1,16 @@
-define(['require', 'chai', 'FrameRendererBuilder', 'FrameRenderer'], function(
+define([
+  'require',
+  'chai',
+  'FrameRendererBuilder',
+  'FrameRenderer',
+  'RandomizedFrameRenderStrategy'
+], (
   require,
   chai,
   FrameRendererBuilder,
-  FrameRenderer
-) {
-  var should = chai.should();
-  var expect = chai.expect;
-
-  var node_stub = sinon.stub($('div'));
-
+  FrameRenderer,
+  RandomizedFrameRenderStrategy
+) => {
   describe('constructor()', () => {
     describe('plain constructor call', () => {
       it("shouldn't throw any exception", () => {
@@ -21,8 +23,8 @@ define(['require', 'chai', 'FrameRendererBuilder', 'FrameRenderer'], function(
 
   describe('build()', () => {
     describe('default FrameRenderer', () => {
-      var sut = new FrameRendererBuilder();
-      var result = sut.build();
+      const sut = new FrameRendererBuilder();
+      const result = sut.build();
 
       it('should return the defined object', () => {
         expect(result instanceof FrameRenderer).to.be.true;
@@ -30,8 +32,8 @@ define(['require', 'chai', 'FrameRendererBuilder', 'FrameRenderer'], function(
     });
 
     describe('setText', () => {
-      var sut = new FrameRendererBuilder();
-      var result = sut.setTextDataSource('abc').build();
+      const sut = new FrameRendererBuilder();
+      const result = sut.setTextDataSource('abc').build();
 
       it('should return the defined object', () => {
         expect(result instanceof FrameRenderer).to.be.true;
@@ -42,9 +44,23 @@ define(['require', 'chai', 'FrameRendererBuilder', 'FrameRenderer'], function(
       });
     });
 
+    describe('setRenderStrategy', () => {
+      const sut = new FrameRendererBuilder();
+      const result = sut
+        .setRenderStrategy(new RandomizedFrameRenderStrategy())
+        .build();
+
+      it('should return the defined object', () => {
+        expect(
+          result.getFrameRenderStrategy() instanceof
+            RandomizedFrameRenderStrategy
+        ).to.be.true;
+      });
+    });
+
     describe('setOptions noiseratio', () => {
-      var sut = new FrameRendererBuilder();
-      var result = sut.setOptions({ noiseratio: 0.23 }).build();
+      const sut = new FrameRendererBuilder();
+      const result = sut.setOptions({ noiseratio: 0.23 }).build();
 
       it('should update the value for the given key', () => {
         expect(result.getOptions().noiseratio).to.equal(0.23);

@@ -26,6 +26,11 @@ define('WidgetBuilder', ['FrameRendererBuilder', 'Widget'], (
       return this;
     }
 
+    setFrameRenderStrategy(frameRenderStrategy) {
+      this.frameRendererBuilder.setRenderStrategy(frameRenderStrategy);
+      return this;
+    }
+
     setOptions(options) {
       this.frameRendererBuilder.setOptions(options);
       return this;
