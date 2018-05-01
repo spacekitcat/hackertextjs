@@ -1,4 +1,7 @@
-define('WidgetBuilder', ['FrameRendererBuilder', 'Widget'], (FrameRendererBuilder, Widget) =>
+define('WidgetBuilder', ['FrameRendererBuilder', 'Widget'], (
+  FrameRendererBuilder,
+  Widget
+) =>
   class WidgetBuilder {
     constructor(targetNode) {
       this.frameRendererBuilder = new FrameRendererBuilder();
@@ -7,7 +10,10 @@ define('WidgetBuilder', ['FrameRendererBuilder', 'Widget'], (FrameRendererBuilde
     }
 
     build() {
-      const widget = new Widget(this.targetNode, this.frameRendererBuilder.build());
+      const widget = new Widget(
+        this.targetNode,
+        this.frameRendererBuilder.build()
+      );
       if (this.rowCount !== undefined) {
         widget.setRowCount(this.rowCount);
         this.rowCount = undefined;

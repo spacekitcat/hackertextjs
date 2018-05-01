@@ -39,7 +39,7 @@ define('SinePhaseFrameRenderStrategy', [], () =>
       }
 
       const activeNoiseRatio = Math.abs(
-        Math.sin(1 * 3.141 * 2 * new Date().getTime() + 1)
+        Math.sin(0.5 * 3.141 * 2 * new Date().getTime() + 1)
       );
 
       for (let i = 0; i < framesize; i += 1) {

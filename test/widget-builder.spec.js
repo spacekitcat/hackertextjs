@@ -1,19 +1,16 @@
-define(['require', 'chai', 'WidgetBuilder', 'Widget'], function(
+define(['require', 'chai', 'WidgetBuilder', 'Widget'], (
   require,
   chai,
   WidgetBuilder,
   Widget
-) {
-  var should = chai.should();
-  var expect = chai.expect;
-
-  var node_stub = sinon.stub($('div'));
+) => {
+  const nodeStub = sinon.stub($('div'));
 
   describe('constructor()', () => {
     describe('plain constructor call', () => {
       it("shouldn't throw any exception", () => {
         expect(() => {
-          new WidgetBuilder(node_stub);
+          new WidgetBuilder(nodeStub);
         }).to.not.throw();
       });
     });
@@ -21,8 +18,8 @@ define(['require', 'chai', 'WidgetBuilder', 'Widget'], function(
 
   describe('build()', () => {
     describe('default Widget', () => {
-      var sut = new WidgetBuilder(node_stub);
-      var result = sut.build();
+      const sut = new WidgetBuilder(nodeStub);
+      const result = sut.build();
 
       it('should return the defined object', () => {
         expect(result instanceof Widget).to.be.true;
@@ -30,8 +27,8 @@ define(['require', 'chai', 'WidgetBuilder', 'Widget'], function(
     });
 
     describe('setTextDataSource', () => {
-      var sut = new WidgetBuilder(node_stub);
-      var result = sut.setTextDataSource('abc').build();
+      const sut = new WidgetBuilder(nodeStub);
+      const result = sut.setTextDataSource('abc').build();
 
       it('should return the defined object', () => {
         expect(result instanceof Widget).to.be.true;
@@ -39,8 +36,8 @@ define(['require', 'chai', 'WidgetBuilder', 'Widget'], function(
     });
 
     describe('setRowCount', () => {
-      var sut = new WidgetBuilder(node_stub);
-      var result = sut.setRowCount(45).build();
+      const sut = new WidgetBuilder(nodeStub);
+      const result = sut.setRowCount(45).build();
 
       it('rowcount value should get set', () => {
         expect(result.getRowCount()).to.equal(45);
@@ -48,12 +45,12 @@ define(['require', 'chai', 'WidgetBuilder', 'Widget'], function(
     });
 
     describe('setTargetNode', () => {
-      var sut = new WidgetBuilder(node_stub);
-      var new_target_node_stub = sinon.stub($('div'));
-      var result = sut.setTargetNode(new_target_node_stub).build();
+      const sut = new WidgetBuilder(nodeStub);
+      const newTargetNodeStub = sinon.stub($('div'));
+      const result = sut.setTargetNode(newTargetNodeStub).build();
 
       it('target node should get set', () => {
-        expect(result.getTargetNode()).to.equal(new_target_node_stub);
+        expect(result.getTargetNode()).to.equal(newTargetNodeStub);
       });
     });
   });

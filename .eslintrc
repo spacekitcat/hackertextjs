@@ -9,7 +9,8 @@
     "hacker_text_config": true,
     "describe": true,
     "it": true,
-    "sinon": true
+    "sinon": true,
+    "expect": true
   },
   "rules": {
     "no-console": 0,

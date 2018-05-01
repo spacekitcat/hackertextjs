@@ -1,99 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title></title>
   <meta charset="UTF-8">
   <script type="text/javascript">
 
-  var hacker_text_config = {     
-    targets: [ 
-      { htmlId: "hackertext", 
-        text: "THE_MATRIX", 
-        text_character_filters: ['LeetSourceFilter'], 
-        framerate: 20, 
-        rows: 100 
-      } 
-    ] 
-  };
+    var hacker_text_config = {
+      targets: [
+        {
+          htmlId: "hackertext",
+          text: "_hello",
+          renderer: {
+            strategy: 'RandomizedFrameRenderStrategy'
+          },
+          //text_character_filters: ['LeetSourceFilter'],
+          framerate: 6,
+          rows: 20
+        }
+      ]
+    };
 
   </script>
-  <script type="text/javascript" src=
-  "../libs/jquery.js"></script>
+  <script type="text/javascript" src="../libs/jquery.js"></script>
   <script data-main="../src/hackertext" src="../libs/require.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
 
   <style media="screen" type="text/css">
-  body {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size:10px;
-  color: #3FDF3F;
-  color: #DFDF3F;
-  background-color: #292B29; margin:0; padding:0;
-  }
+    body {
+      font-family: "Lucida Console", Monaco, monospace;
+      font-size: 10px;
+      color: #3FDF3F;
+      color: #DFDF3F;
+      background-color: #292B29;
+      margin: 0;
+      padding: 0;
+    }
 
-  h1, p {
-    font-size:12px;
-    color: #DFDF3F;
-    letter-spacing: 1px;
-    padding-left:0px;
-    padding-right: 0px;
-    font-size: 12px;
-    font-family: 'Lobster', cursive;
-    font-family: 'Source Code Pro', monospace;
-    text-align: left;
-  }
+    h1,
+    p {
+      font-size: 12px;
+      color: #DFDF3F;
+      letter-spacing: 1px;
+      padding-left: 0px;
+      padding-right: 0px;
+      font-size: 12px;
+      font-family: 'Lobster', cursive;
+      font-family: 'Source Code Pro', monospace;
+      text-align: left;
+    }
 
-  h1 {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    letter-spacing:3px;
-  }
+    h1 {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+    }
 
-  .wrapper {
-  padding-left: 22px;
-  padding-right: 22px;
-  }
+    .wrapper {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
 
-  .hidden {
-  display: none;
-  }
+    .hidden {
+      display: none;
+    }
 
-  .newline {
-    margin: 0px;
-    padding: 0px;
-  }
-  
-  .newlineright {
-    margin: 0px;
-    padding: 0px;
-    text-align: right;
-  }
+    .newline {
+      margin: 0px;
+      padding: 0px;
+    }
 
-  .right {
-    margin: 0px;
-    padding: 0px;
-    text-align: right;
-  }
+    .newlineright {
+      margin: 0px;
+      padding: 0px;
+      text-align: right;
+    }
 
-  .blurb {
-    margin-bottom: 12px;
-    margin-top: 12px;
-  }
+    .right {
+      margin: 0px;
+      padding: 0px;
+      text-align: right;
+    }
 
+    .blurb {
+      margin-bottom: 12px;
+      margin-top: 12px;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrapper" id="wrapper">
-  <h1>ES6 TEST HARNESS</h1> 
-  <div class="blurb">
-    <p class="newline">This test harness uses the raw, unprocessed ES6 source files to ease development or provide a quick demonstration.</p>
-    <p class="newline">Production builds are transpiled via Babel and merged into a minified js file.</p>
-  </div>
-  <div class="hackertext" id="hackertext"></div>
-  <div class="blurb">
-  <p class="right">Du trinkst die Kaffee?</p>
-  </div>
+    <h1>ES6 TEST HARNESS</h1>
+    <div class="blurb">
+      <p class="newline">This test harness uses the raw, unprocessed ES6 source files to ease development or provide a quick demonstration.</p>
+      <p class="newline">Production builds are transpiled via Babel and merged into a minified js file.</p>
+    </div>
+    <div class="hackertext" id="hackertext"></div>
+    <div class="blurb">
+      <p class="right">Du trinkst die Kaffee?</p>
+    </div>
   </div>
 </body>
+
 </html>

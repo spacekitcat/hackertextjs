@@ -13,6 +13,17 @@ define('WidgetAssemblyDirector', [
       }
     }
 
+    static instantiateRenderStrategy(renderStrategy) {
+      try {
+        return require(renderStrategy);
+      } catch (exception) {
+        console.log(exception);
+        throw new Error(
+          `The render strategy '${renderStrategy}' could not be loaded.`
+        );
+      }
+    }
+
     static addSourceFilters(textDataSource, filters) {
       if (filters) {
         filters.forEach(filterName =>
@@ -37,6 +48,14 @@ define('WidgetAssemblyDirector', [
       const widgetBuilder = new WidgetBuilder();
       const node = DomInitialiser.initialiseDomNode(widgetDescriptor);
 
+      if (widgetDescriptor.renderer) {
+        const renderStrategy = WidgetAssemblyDirector.instantiateRenderStrategy(
+          // 'SinePhaseFrameRenderStrategy'
+          widgetDescriptor.renderer.renderStrategy
+        );
+
+        console.log('Loaded >>>', renderStrategy);
+      }
       const textDataSource = TextDataSourceFactory.makeCoreTextDataSource(
         widgetDescriptor.text
       );
