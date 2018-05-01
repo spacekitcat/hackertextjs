@@ -19,10 +19,7 @@ define('FrameRendererBuilder', [
         const renderStrategy = new SinePhaseFrameRenderStrategy();
         copy.setFrameRenderStrategy(renderStrategy);
       }
-      // const renderStrategy = new SinePhaseFrameRenderStrategy();
       copy.getFrameRenderStrategy().setTextDataSource(copy.getTextDataSource());
-      // renderStrategy.setOptionValue('dynamicnoiseratio', true);
-      // copy.setFrameRenderStrategy(renderStrategy);
       return copy;
     }
 
