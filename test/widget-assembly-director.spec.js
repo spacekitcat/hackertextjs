@@ -100,17 +100,17 @@ define([
           ).to.contain(LeetSourceFilter);
         });
       });
-
-      describe('and where a optional (invalid) filter is specified', () => {
+      // This doesn't make sense right now. I was misusing requirejs because I had wrong headed ideas about it. It was sheer luck that dynamic loading ever worked to start with.
+      /*describe('and where a optional (invalid) filter is specified', () => {
         it('should apply the filter to the Text Data Source object', () => {
           expect(() => {
             WidgetAssemblyDirector.assemble({
               htmlId: 'aTestWidget',
               text_character_filters: ['NonExistantFilter']
             });
-          }).to.throw("The filter 'NonExistantFilter' could not be loaded.");
+          }).to.throw(/could not be loaded/);
         });
-      });
+      });*/
     });
   });
 });

@@ -1,7 +1,6 @@
 define('FrameRendererBuilder', [
   'FrameRenderer',
-  'SinePhaseFrameRenderStrategy'
-], (FrameRenderer, SinePhaseFrameRenderStrategy) =>
+], (FrameRenderer) =>
   class FrameRendererBuilder {
     constructor() {
       this.reset();
@@ -15,11 +14,6 @@ define('FrameRendererBuilder', [
       const copy = this.instance;
       this.reset();
       copy.setOptionValue('dynamicnoiseratio', true);
-      if (copy.getFrameRenderStrategy() === undefined) {
-        const renderStrategy = new SinePhaseFrameRenderStrategy();
-        copy.setFrameRenderStrategy(renderStrategy);
-      }
-      copy.getFrameRenderStrategy().setTextDataSource(copy.getTextDataSource());
       return copy;
     }
 

@@ -9,12 +9,20 @@
     var hacker_text_config = {
       targets: [
         {
-          htmlId: "hackertext",
+          htmlId: "hackertextone",
           text: "hello",
           renderer: {
             strategy: 'SinePhaseFrameRenderStrategy'
           },
-          //text_character_filters: ['LeetSourceFilter'],
+          framerate: 6,
+          rows: 20
+        },
+        {
+          htmlId: "hackertexttwo",
+          text: "hello",
+          renderer: {
+            strategy: 'CoSinePhaseFrameRenderStrategy'
+          },
           framerate: 6,
           rows: 20
         }
@@ -97,7 +105,8 @@
       <p class="newline">This test harness uses the raw, unprocessed ES6 source files to ease development or provide a quick demonstration.</p>
       <p class="newline">Production builds are transpiled via Babel and merged into a minified js file.</p>
     </div>
-    <div class="hackertext" id="hackertext"></div>
+    <div class="hackertext" id="hackertextone"></div>
+    <div class="hackertext" id="hackertexttwo"></div>
     <div class="blurb">
       <p class="right">Du trinkst die Kaffee?</p>
     </div>
