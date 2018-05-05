@@ -1,7 +1,7 @@
 {
   "name": "hackertextjs",
   "description": "A web based library for customizable hacker text widgets.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/spacekitcat/hackertextjs",
   "author": {
     "name": "Lisa Rae Burton",
@@ -15,12 +15,7 @@
   "bugs": {
     "url": "https://github.com/spacekitcat/hackertextjs/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/spacekitcat/hackertextjs/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "main": "lib/hacker-text-js",
   "engines": {
     "node": ">= 0.10.0"

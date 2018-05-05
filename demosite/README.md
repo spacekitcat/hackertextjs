@@ -122,7 +122,7 @@ The following are provided:
   }
   ```
 * **CoSinePhaseFrameRenderStrategy**:
-  Generates randomized frames, but it uses a Cos function to control the noise ratio.The frames will iterate from 0% to 100% noise and then from 100% back down to 0%. Repeat infinity. It's the same as SinePhaseFrameRenderStrategy, but the phase is always inverted. Using two widgets, one with CoSinePhaseFrameRenderStrategy and the other with SinePhaseFrameRenderStrategy is very nice.
+  Generates randomized frames, but it uses a Cos function to control the noise ratio.The frames will iterate from 100% to 0% noise and then from 0% back down to 100%. Repeat infinity. It's the same as SinePhaseFrameRenderStrategy, but the phase is always inverted. Using two widgets, one with CoSinePhaseFrameRenderStrategy and the other with SinePhaseFrameRenderStrategy is very nice.
   ```javascript
   {
   htmlId: "hackertextelement",
