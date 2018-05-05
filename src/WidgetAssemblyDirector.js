@@ -3,21 +3,25 @@ define('WidgetAssemblyDirector', [
   'DomInitialiser',
   'TextDataSourceFactory',
   'RandomizedFrameRenderStrategy',
-  'SinePhaseFrameRenderStrategy'
+  'SinePhaseFrameRenderStrategy',
+  'CoSinePhaseFrameRenderStrategy',
+  'LeetSourceFilter',
 ], (
   WidgetBuilder,
   DomInitialiser,
   TextDataSourceFactory,
   RandomizedFrameRenderStrategy,
-  SinePhaseFrameRenderStrategy
+  SinePhaseFrameRenderStrategy,
+  CoSinePhaseFrameRenderStrategy,
+  LeetSourceFilter
 ) =>
   class WidgetAssemblyDirector {
     static instantiateSourceFilter(filterName) {
       try {
-        return require(filterName);
+        return LeetSourceFilter;
       } catch (exception) {
         console.log(exception);
-        throw new Error(`The filter '${filterName}' could not be loaded.`);
+        throw new Error(`The filter '${filterName}' could not be loaded: ${exception}`);
       }
     }
 
@@ -56,41 +60,37 @@ define('WidgetAssemblyDirector', [
       const widgetBuilder = new WidgetBuilder();
       const node = DomInitialiser.initialiseDomNode(widgetDescriptor);
 
-      const textDataSource = TextDataSourceFactory.makeCoreTextDataSource(
-        widgetDescriptor.text
-      );
+      let textDataSource = TextDataSourceFactory.makeCoreTextDataSource('');
+      if (widgetDescriptor.text !== undefined && widgetDescriptor.text !== null) {
+        textDataSource = TextDataSourceFactory.makeCoreTextDataSource(
+          widgetDescriptor.text
+        );
+      }
       WidgetAssemblyDirector.addSourceFilters(
         textDataSource,
         widgetDescriptor.text_character_filters
       );
 
-      if (widgetDescriptor.renderer) {
-        if (
-          widgetDescriptor.renderer.strategy === 'RandomizedFrameRenderStrategy'
-        ) {
-          widgetBuilder.setFrameRenderStrategy(
-            new RandomizedFrameRenderStrategy()
-          );
+      let renderStrategy = new SinePhaseFrameRenderStrategy()
+      if (widgetDescriptor.renderer !== undefined && widgetDescriptor.renderer !== null) {
+        if (widgetDescriptor.renderer.strategy === 'CoSinePhaseFrameRenderStrategy') {
+            renderStrategy = new CoSinePhaseFrameRenderStrategy()
+        } else if (widgetDescriptor.renderer.strategy === 'SinePhaseFrameRenderStrategy') {
+            renderStrategy = new SinePhaseFrameRenderStrategy()
         } else {
-          widgetBuilder.setFrameRenderStrategy(
-            new SinePhaseFrameRenderStrategy()
-          );
+            renderStrategy = new RandomizedFrameRenderStrategy()
         }
-
-        // const RenderStrategy = WidgetAssemblyDirector.instantiateRenderStrategy(
-        // 'SinePhaseFrameRenderStrategy'
-        // widgetDescriptor.renderer.strategy
-        // );
-        // console.log('$$$ ', widgetDescriptor.renderer.strategy);
-        // console.log('Loaded >>>', new RenderStrategy().render);
-
-        // widgetBuilder.setTextDataSource(textDataSource);
       }
+      
+      console.log(renderStrategy);
+      
+      renderStrategy.setTextDataSource(textDataSource);
+      widgetBuilder.setFrameRenderStrategy(renderStrategy);
+      widgetBuilder.setTextDataSource(textDataSource);
 
       return widgetBuilder
         .setTargetNode(node)
         .setRowCount(widgetDescriptor.rows)
-        .setTextDataSource(textDataSource)
         .build();
     }
   });
