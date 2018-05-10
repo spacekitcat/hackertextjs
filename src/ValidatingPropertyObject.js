@@ -1,7 +1,20 @@
 define('ValidatingPropertyObject', [], () =>
   class ValidatingPropertyObject {
-    getValue(key) {
-      throw Error(`invalid key ${key}`);
+    constructor() {
+      this.properties = new Map();
     }
-    setValue(key, value) {}
+    getValue(key) {
+      if (
+        key === undefined ||
+        key === null ||
+        this.properties.get(key) === undefined
+      ) {
+        throw Error(`invalid key ${key}`);
+      }
+
+      return this.properties.get(key);
+    }
+    setValue(key, value) {
+      this.properties.set(key, value);
+    }
   });

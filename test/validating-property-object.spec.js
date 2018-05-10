@@ -40,6 +40,12 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
           });
         });
       });
+
+      describe('and the key does exist', () => {
+        it('should throw an exception', () => {
+          expect(sut.getValue('valid-key')).to.equal('valid-value');
+        });
+      });
     });
   });
 });
