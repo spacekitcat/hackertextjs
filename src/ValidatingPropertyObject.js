@@ -4,11 +4,7 @@ define('ValidatingPropertyObject', [], () =>
       this.properties = new Map();
     }
     getValue(key) {
-      if (
-        key === undefined ||
-        key === null ||
-        this.properties.get(key) === undefined
-      ) {
+      if (key === undefined || key === null || key === '') {
         throw Error(`invalid key ${key}`);
       }
 

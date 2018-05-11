@@ -7,17 +7,16 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
   const { expect } = chai;
 
   describe('getValue', () => {
-    describe('where the key set is empty', () => {
+    describe('where the property object is empty', () => {
       describe('and the key does not exist', () => {
         const sut = new ValidatingPropertyObject();
 
-        it('should throw an exception', () => {
-          expect(() => {
-            sut.getValue('this-key-does-not-exist');
-          }).to.throw(/invalid key/);
+        it('should return "undefined"', () => {
+          expect(sut.getValue('this-key-does-not-exist')).to.equal(undefined);
         });
       });
-      describe('and the key is empty', () => {
+
+      describe('and the key is an empty string', () => {
         const sut = new ValidatingPropertyObject();
 
         it('should throw an exception', () => {
@@ -27,6 +26,7 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
         });
       });
     });
+
     describe('where the key has one item', () => {
       const sut = new ValidatingPropertyObject();
       beforeEach(() => {
