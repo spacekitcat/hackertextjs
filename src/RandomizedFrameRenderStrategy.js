@@ -2,16 +2,6 @@ define('RandomizedFrameRenderStrategy', [
   'ValidatingPropertyObject'
 ], ValidatingPropertyObject =>
   class RandomizedFrameRenderStrategy {
-    isValidKey(key) {
-      return this.props.hasKey(key);
-    }
-
-    validateCustomOptions(customOptions) {
-      return Object.keys(customOptions).every(
-        RandomizedFrameRenderStrategy.isValidKey
-      );
-    }
-
     constructor(options) {
       this.props = new ValidatingPropertyObject({
         noiseratio: 0.5,
@@ -67,11 +57,7 @@ define('RandomizedFrameRenderStrategy', [
     }
 
     getOptionValue(key) {
-      // if (key === undefined || key === null) {
-      // throw new Error('An option key must be provided.');
-      // }
-
-      return this.options[key];
+      return this.props.getValue(key);
     }
 
     setOptions(options) {

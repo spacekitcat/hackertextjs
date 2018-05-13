@@ -4,8 +4,8 @@ define(['require', 'chai', 'StringIterator', 'RandomizedFrameRenderStrategy'], (
   StringIterator,
   RandomizedFrameRenderStrategy
 ) => {
-  describe('render', function() {
-    var random_stub;
+  describe('render', () => {
+    let random_stub;
 
     before(() => {
       random_stub = sinon.stub(Math, 'random').returns(0.4);

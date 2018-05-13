@@ -5,6 +5,22 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
   ValidatingPropertyObject
 ) => {
   const { expect } = chai;
+  describe('validateCustomOptions', () => {
+    const sut = new ValidatingPropertyObject({
+      'acceptable-key-one': 'key-one-value',
+      'acceptable-key-two': 'key-two-value'
+    });
+
+    it('should accept valid keys', () => {
+      expect(
+        sut.validateCustomOptions({
+          'acceptable-key-one': 'newk1v',
+          'acceptable-key-two': 'newk2v'
+        })
+      ).to.equal(true);
+    });
+  });
+
   describe('hasKey', () => {
     const sut = new ValidatingPropertyObject({
       'acceptable-key-one': 'key-one-value',
@@ -17,6 +33,7 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
       });
     });
   });
+
   describe('setValue', () => {
     const sut = new ValidatingPropertyObject({
       'acceptable-key-one': 'key-one-value',
