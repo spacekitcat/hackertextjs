@@ -67,19 +67,15 @@ define('RandomizedFrameRenderStrategy', [
     }
 
     getOptionValue(key) {
-      if (key === undefined || key === null) {
-        throw new Error('An option key must be provided.');
-      }
+      // if (key === undefined || key === null) {
+      // throw new Error('An option key must be provided.');
+      // }
 
       return this.options[key];
     }
 
     setOptions(options) {
       if (options !== null && options !== undefined) {
-        if (!this.validateCustomOptions(options)) {
-          throw new Error('invalid options');
-        }
-
         Object.keys(options).array.forEach(element => {
           this.props.setValue(element, options[element]);
         });
@@ -87,18 +83,6 @@ define('RandomizedFrameRenderStrategy', [
     }
 
     setOptionValue(key, value) {
-      if (key === undefined || key === null) {
-        throw new Error('An option key must be provided.');
-      }
-
-      if (!this.isValidKey(key)) {
-        throw new Error(`invalid option key ${key} provided.`);
-      }
-
-      if (value === undefined || value === null) {
-        throw new Error('A value must be provided.');
-      }
-
       this.props.setValue(key, value);
     }
 
