@@ -11,7 +11,8 @@
     "it": true,
     "sinon": true,
     "expect": true,
-    "beforeEach": true
+    "beforeEach": true,
+    "define": true
   },
   "rules": {
     "no-console": 0,

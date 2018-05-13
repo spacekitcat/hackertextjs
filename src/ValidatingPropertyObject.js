@@ -1,16 +1,26 @@
 define('ValidatingPropertyObject', [], () =>
   class ValidatingPropertyObject {
-    constructor() {
-      this.properties = new Map();
+    constructor(acceptedKeysWithDefaultValues) {
+      this.properties = {};
+      if (acceptedKeysWithDefaultValues !== undefined) {
+        this.properties = acceptedKeysWithDefaultValues;
+      }
     }
     getValue(key) {
       if (key === undefined || key === null || key === '') {
         throw Error(`invalid key ${key}`);
       }
 
-      return this.properties.get(key);
+      return this.properties[key];
     }
     setValue(key, value) {
-      this.properties.set(key, value);
+      if (this.properties[key] === undefined) {
+        throw new Error(`'${key}' is not a valid property key`);
+      }
+
+      this.properties[key] = value;
+    }
+    hasKey(key) {
+      return this.properties[key] !== undefined;
     }
   });

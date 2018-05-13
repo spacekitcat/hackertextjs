@@ -5,6 +5,39 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
   ValidatingPropertyObject
 ) => {
   const { expect } = chai;
+  describe('hasKey', () => {
+    const sut = new ValidatingPropertyObject({
+      'acceptable-key-one': 'key-one-value',
+      'acceptable-key-two': 'key-two-value'
+    });
+
+    describe('and it does contain the key', () => {
+      it('should return true', () => {
+        expect(sut.hasKey('acceptable-key-one')).to.equal(true);
+      });
+    });
+  });
+  describe('setValue', () => {
+    const sut = new ValidatingPropertyObject({
+      'acceptable-key-one': 'key-one-value',
+      'acceptable-key-two': 'key-two-value'
+    });
+
+    describe('and the key is an acceptable value', () => {
+      expect(() =>
+        sut.setValue('unacceptable-key', 'new-key-one-value')
+      ).to.throw(/'unacceptable-key' is not a valid property key/);
+    });
+
+    describe('and the key is an acceptable value', () => {
+      beforeEach(() => {
+        sut.setValue('acceptable-key-one', 'new-key-one-value');
+      });
+      it('should update the value', () => {
+        expect(sut.getValue('acceptable-key-one', 'new-key-one-value'));
+      });
+    });
+  });
 
   describe('getValue', () => {
     describe('where the property object is empty', () => {
@@ -27,10 +60,9 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
       });
     });
 
-    describe('where the key has one item', () => {
-      const sut = new ValidatingPropertyObject();
-      beforeEach(() => {
-        sut.setValue('valid-key', 'valid-value');
+    describe('where the key has one item with a default value', () => {
+      const sut = new ValidatingPropertyObject({
+        'valid-key': 'default-value'
       });
 
       describe('and the key does not exist', () => {
@@ -43,7 +75,7 @@ define(['require', 'chai', 'StringIterator', 'ValidatingPropertyObject'], (
 
       describe('and the key does exist', () => {
         it('should throw an exception', () => {
-          expect(sut.getValue('valid-key')).to.equal('valid-value');
+          expect(sut.getValue('valid-key')).to.equal('default-value');
         });
       });
     });
