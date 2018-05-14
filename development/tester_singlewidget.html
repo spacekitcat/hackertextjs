@@ -12,13 +12,22 @@
           htmlId: "hackertextone",
           text: "hello",
           renderer: {
-            strategy: 'SinePhaseFrameRenderStrategy'
+            strategy: 'RandomizedFrameRenderStrategy'
           },
           framerate: 6,
           rows: 20
         },
         {
           htmlId: "hackertexttwo",
+          text: "hello",
+          renderer: {
+            strategy: 'SinePhaseFrameRenderStrategy'
+          },
+          framerate: 6,
+          rows: 20
+        },
+        {
+          htmlId: "hackertextthree",
           text: "world",
           renderer: {
             strategy: 'CoSinePhaseFrameRenderStrategy'
@@ -107,6 +116,7 @@
     </div>
     <div class="hackertext" id="hackertextone"></div>
     <div class="hackertext" id="hackertexttwo"></div>
+    <div class="hackertext" id="hackertextthree"></div>
     <div class="blurb">
       <p class="right">Du trinkst die Kaffee?</p>
     </div>
