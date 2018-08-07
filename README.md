@@ -46,7 +46,7 @@ in your projects root directory might make use of hackertextjs:
     targets: [{
     htmlId: "hackertext",
     text: "A_SPECTRE_HAUNTS_EUROPE_",
-    rederer: {
+    renderer: {
       strategy: "RandomizedFrameRenderStrategy"
     },
     framerate: 3,
